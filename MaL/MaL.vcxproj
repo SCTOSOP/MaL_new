@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Linker.cpp" />
+    <ClCompile Include="LParts.cpp" />
     <ClCompile Include="Tools.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Translate.cpp" />

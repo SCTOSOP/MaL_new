@@ -79,10 +79,6 @@ void* Linker::link()
 	delete[] tmain;
 	codes->pop_back();
 
-	codes->insert(codes->begin(), "{");
-	codes->insert(codes->begin(), "nameplace:main.mal");
-	codes->push_back("}");
-
 	// 保存已打开的文件FILE*
 	unordered_set<string> files_opened;
 
@@ -173,7 +169,6 @@ void* Linker::link()
 				item = codes->erase(item);
 
 				auto newfvi = newfilevector.end() - 1;
-				item = codes->insert(item, "}");
 				while (true)
 				{
 					item = codes->insert(item, *newfvi);
@@ -183,8 +178,6 @@ void* Linker::link()
 					}
 					newfvi--;
 				}
-				item = codes->insert(item, "{");
-				item = codes->insert(item, "nameplace:" + regexincludefilename[1]);
 				continue;
 			}
 		}
@@ -195,8 +188,6 @@ void* Linker::link()
 
 	// TODO Linker
 	char separatorchar = '\n';
-	string codessize = string("//Total ") + to_string(codes->size());
-	fwrite(codessize.c_str(), 1, codessize.size(), flink);
 	fwrite(&separatorchar, 1, 1, flink);
 	for (auto& i : *codes)
 	{
